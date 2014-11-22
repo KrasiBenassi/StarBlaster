@@ -14,8 +14,8 @@
         <Grid.Background>
             <ImageBrush></ImageBrush>
         </Grid.Background>
-        <Button x:Name="playButton" Content="Play !" HorizontalAlignment="Center" Margin="145,311,146,272" Click="playButton_Click" />
+        <Button x:Name="playButton" Content="Play !" HorizontalAlignment="Center" Margin="145,311,146,272" Click="PlayButton_Click" />
         <Button x:Name="highscoreButton" Content="High Scores" Margin="145,391,0,192" HorizontalAlignment="Left" />
-        <TextBox x:Name="userNameBox" Margin="0,234,0,0" Text="Enter your name" BorderBrush="White" DoubleTapped="userNameBox_DoubleTapped" />
+        <TextBox x:Name="userNameBox" Margin="0,234,0,0" Text="Enter your name" BorderBrush="White" DoubleTapped="UserNameBox_DoubleTapped" />
     </Grid>
 </Page>

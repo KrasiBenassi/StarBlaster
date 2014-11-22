@@ -6,8 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Background>
+        <ImageBrush Stretch="Fill" ImageSource="Assets/background.png"/>
+    </Page.Background>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/background.png"></ImageBrush>
+        </Grid.Background>
+        <Button x:Name="playButton" Content="Play !" HorizontalAlignment="Center" Margin="642,232,653,498" Click="playButton_Click" />
+        <Button x:Name="highscoreButton" Content="High Scores" Margin="617,342,0,388" HorizontalAlignment="Left" />
+        <TextBox x:Name="userNameBox" Text="Enter your name" BorderBrush="White" DoubleTapped="UserNameBox_DoubleTapped" Margin="460,126,460,601" />
     </Grid>
 </Page>

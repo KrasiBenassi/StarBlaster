@@ -1,6 +1,4 @@
-﻿using Parse;
-using StarBlaster.Common;
-using StarBlaster.ViewModels;
+﻿using StarBlaster.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +7,6 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
-using Windows.Storage;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,7 +26,6 @@ namespace StarBlaster
     /// </summary>
     public sealed partial class GamePage : Page
     {
-        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
@@ -161,19 +157,6 @@ namespace StarBlaster
             scoreTextBlock.Text = totalstars.ToString();
             SpawnStar();
         }
-
-        private void UploadButton_Click(object sender, RoutedEventArgs e)
-        {
-            string usename = localSettings.Values["username"].ToString();
-
-            ParseObject player = new ParseObject("Players");
-            player["name"] = usename;
-            player["score"] = totalstars.ToString();
-
-            player.SaveAsync();
-        }
-
-
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
         /// </summary>
@@ -244,7 +227,6 @@ namespace StarBlaster
         }
 
         #endregion
-
 
     }
 }

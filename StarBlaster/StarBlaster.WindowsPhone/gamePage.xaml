@@ -16,9 +16,15 @@
         <TextBlock x:Name="timeTextBlock" Text="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="90"/>
 
         <Canvas x:Name="canvasArea" HorizontalAlignment="Left" Height="532" VerticalAlignment="Top" Width="400">
-            <TextBlock x:Name="statusTextBlock" Text="Tap to began" RenderTransformOrigin="2.744,18.902" Canvas.Left="61" Canvas.Top="249" FontSize="45"/>
-            <Button x:Name="tapAreaButton" Click="TapAreaButton_Click" Canvas.Left="121" Canvas.Top="317"/>
+            <TextBlock x:Name="statusTextBlock" Text="Tap to begin" TextAlignment="Center" FontSize="45" Canvas.Left="73" Canvas.Top="240"/>
+            <HyperlinkButton x:Name="tapAreaButton" Click="TapAreaButton_Click" Height="800" Width="500"/>
         </Canvas>
-
+        <Grid x:Name="resultsGrid" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF323232" Visibility="Collapsed">
+            <TextBlock x:Name="resultsTitleText" HorizontalAlignment="Stretch" Margin="10,10,0,0" TextWrapping="Wrap" Text="Time's Up crazylongname!" VerticalAlignment="Top" TextAlignment="Center" FontSize="36"/>
+            <TextBlock x:Name="resultsScoreLabel" HorizontalAlignment="Stretch" Margin="10,152,0,0" TextWrapping="Wrap" Text="You scored" VerticalAlignment="Top" FontSize="36" TextAlignment="Center"/>
+            <TextBlock x:Name="resultsScoreTotalText" HorizontalAlignment="Stretch" Margin="10,0,0,300" TextWrapping="Wrap" Text="99" FontSize="102" TextAlignment="Center" VerticalAlignment="Bottom"/>
+            <Button x:Name="uploadButton" Content="Upload Score" VerticalAlignment="Top" Height="80" FontSize="24" HorizontalAlignment="Left" Width="220" Margin="93,369,0,0" Click="UploadButton_Click"/>
+            <Button x:Name="skipButton" Content="Skip" VerticalAlignment="Top" Height="80" FontSize="24" HorizontalAlignment="Left" Width="220" Margin="93,460,0,0"/>
+        </Grid>
     </Grid>
 </Page>

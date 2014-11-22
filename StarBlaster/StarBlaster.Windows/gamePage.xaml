@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="StarBlaster.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StarBlaster"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Assets/background.png"/>
+        </Grid.Background>
+        <TextBlock x:Name="scoreTextBlock" Text="99" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="90"/>
+        <TextBlock x:Name="timeTextBlock" Text="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="90"/>
+
+        <Canvas x:Name="canvasArea" HorizontalAlignment="Left" Height="758" VerticalAlignment="Top" Width="1356">
+            <TextBlock x:Name="statusTextBlock" Text="Tap to begin" TextAlignment="Center" FontSize="45" Canvas.Left="524" Canvas.Top="327"/>
+            <HyperlinkButton x:Name="tapAreaButton" Click="TapAreaButton_Click" Height="767" Width="1363"/>
+        </Canvas>
+        <Grid x:Name="resultsGrid" Margin="0,-10,0,10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF323232" Visibility="Collapsed">
+            <TextBlock x:Name="resultsTitleText" HorizontalAlignment="Stretch" Margin="10,10,0,0" TextWrapping="Wrap" Text="Time's Up crazylongname!" VerticalAlignment="Top" TextAlignment="Center" FontSize="36"/>
+            <TextBlock x:Name="resultsScoreLabel" HorizontalAlignment="Stretch" Margin="10,125,0,0" TextWrapping="Wrap" Text="You scored" VerticalAlignment="Top" FontSize="36" TextAlignment="Center"/>
+            <TextBlock x:Name="resultsScoreTotalText" HorizontalAlignment="Stretch" Margin="10,0,0,400" TextWrapping="Wrap" Text="99" FontSize="102" TextAlignment="Center" VerticalAlignment="Bottom"/>
+            <Button x:Name="uploadButton" Content="Upload Score" VerticalAlignment="Top" Height="80" FontSize="24" HorizontalAlignment="Left" Width="220" Margin="329,518,0,0"/>
+            <Button x:Name="skipButton" Content="Skip" VerticalAlignment="Top" Height="80" FontSize="24" HorizontalAlignment="Left" Width="220" Margin="833,518,0,0"/>
+        </Grid>
+    </Grid>
+</Page>
