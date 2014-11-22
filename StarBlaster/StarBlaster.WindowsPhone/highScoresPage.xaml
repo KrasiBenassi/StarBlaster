@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="StarBlaster.highScoresPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StarBlaster"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="Assets/background.png"/>
+        </Grid.Background>
+        <ListBox x:Name="highscoresListBox" Background="#CC000000" Margin="41,204,41,70"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="40" TextAlignment="Center" Margin="41,152,0,0" TextWrapping="Wrap" Text="Top Players" VerticalAlignment="Top" Height="47" Width="318"/>
+        <TextBlock HorizontalAlignment="Left" Margin="118,39,0,0" TextWrapping="Wrap" FontSize="30" TextAlignment="Center" Text="My Best" VerticalAlignment="Top" Height="35" Width="147"/>
+        <TextBlock x:Name="myBestScore" HorizontalAlignment="Left" Margin="146,79,0,0" TextWrapping="Wrap" Text="00" FontSize="50" TextAlignment="Center" VerticalAlignment="Top" Width="92" Height="48"/>
+    </Grid>
+</Page>

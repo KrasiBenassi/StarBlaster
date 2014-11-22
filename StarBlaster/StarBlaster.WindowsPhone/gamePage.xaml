@@ -16,7 +16,7 @@
         <TextBlock x:Name="timeTextBlock" Text="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" FontSize="90"/>
 
         <Canvas x:Name="canvasArea" HorizontalAlignment="Left" Height="532" VerticalAlignment="Top" Width="400">
-            <TextBlock x:Name="statusTextBlock" Text="Tap to begin" TextAlignment="Center" FontSize="45" Canvas.Left="73" Canvas.Top="240"/>
+            <TextBlock x:Name="statusTextBlock" Text="Tab to Start" TextAlignment="Center" FontSize="45" Canvas.Top="263" RenderTransformOrigin="1.123,0.525" Width="400"/>
             <HyperlinkButton x:Name="tapAreaButton" Click="TapAreaButton_Click" Height="800" Width="500"/>
         </Canvas>
         <Grid x:Name="resultsGrid" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="#FF323232" Visibility="Collapsed">

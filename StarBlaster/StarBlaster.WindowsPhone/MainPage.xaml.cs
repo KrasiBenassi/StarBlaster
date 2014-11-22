@@ -77,5 +77,10 @@ namespace StarBlaster
                 userNameBox.Text = "";
             }
         }
+
+        private void HighscoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(highScoresPage));
+        }
     }
 }

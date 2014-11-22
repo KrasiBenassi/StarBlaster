@@ -90,7 +90,20 @@ namespace StarBlaster
             {
                 gameTimer.Stop();
                 canvasArea.Children.Clear();
-                showResult();
+
+                if (localSettings.Values["score"] == null)
+                {
+                    localSettings.Values["score"] = totalstars;     
+                }
+                else
+                {
+                    if ((int)localSettings.Values["score"] < totalstars)
+                    {
+                        localSettings.Values["score"] = totalstars;
+                    }
+                }  
+      
+                ShowResult();
             }
             else
             {
@@ -99,7 +112,7 @@ namespace StarBlaster
             }
         }
 
-        private void showResult()
+        private void ShowResult()
         {
             resultsTitleText.Text = "Time Is Up";
             resultsScoreTotalText.Text = totalstars.ToString();
@@ -113,7 +126,7 @@ namespace StarBlaster
                 srarted = true;
                 tapAreaButton.Visibility = Visibility.Collapsed;
                 dispatcherTimer.Start();
-                
+
             }
             else
             {
@@ -138,18 +151,9 @@ namespace StarBlaster
             int leftposition = number.Next(0, (int)caw - 60);
             int topposition = number.Next(0, (int)cah - 60);
 
-            //NewStar.SetValue(Canvas.LeftProperty, leftposition);
-            //NewStar.SetValue(Canvas.TopProperty, topposition)
-
             Canvas.SetLeft(newStar, leftposition);
             Canvas.SetTop(newStar, topposition);
-            //Canvas.SetZIndex(NewStar, 999);
-
             canvasArea.Children.Add(newStar);
-            //var tb = new TextBlock();
-            //tb.Text = "added";
-            //canvasArea.Children.Add(tb);
-
         }
 
         private void NewStar_Tapped(object sender, TappedRoutedEventArgs e)
@@ -169,8 +173,8 @@ namespace StarBlaster
             ParseObject player = new ParseObject("Players");
             player["name"] = usename;
             player["score"] = totalstars.ToString();
-
             player.SaveAsync();
+            Frame.Navigate(typeof(highScoresPage));
         }
 
 
