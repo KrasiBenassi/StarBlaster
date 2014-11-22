@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Windows;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.Popups;
-using Windows.Storage;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,11 +17,15 @@ namespace StarBlaster
     public sealed partial class MainPage : Page
     {
         //ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
+        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
         public MainPage()
         {
             this.InitializeComponent();
-
+            
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            //this.DataContext = new AppViewModel();
         }
 
         /// <summary>
@@ -49,14 +44,14 @@ namespace StarBlaster
             // this event is handled for you.
         }
 
-        private void playButton_Click(object sender, RoutedEventArgs e)
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             bool exaptebleName = CheckUserName(userNameBox.Text);
-            //localSettings.Values["username"] = userNameBox.Text;
-            //Object value = localSettings.Values["username"];
+            
             if (exaptebleName == true)
             {
                 Frame.Navigate(typeof(GamePage));
+                localSettings.Values["username"] = userNameBox.Text;
             }
             else
             {
@@ -67,7 +62,7 @@ namespace StarBlaster
         private bool CheckUserName(string userName)
         {
             bool result = false;
-
+            
             if (userName.All(char.IsLetter))
             {
                 result = true;
@@ -81,6 +76,11 @@ namespace StarBlaster
             {
                 userNameBox.Text = "";
             }
+        }
+
+        private void HighscoreButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(HighScoresPage));
         }
     }
 }

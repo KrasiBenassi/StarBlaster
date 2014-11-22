@@ -80,7 +80,7 @@ namespace StarBlaster
 
         private void HighscoreButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(highScoresPage));
+            Frame.Navigate(typeof(HighScoresPage));
         }
     }
 }

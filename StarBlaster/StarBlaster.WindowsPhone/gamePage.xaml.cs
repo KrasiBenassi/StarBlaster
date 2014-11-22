@@ -170,11 +170,11 @@ namespace StarBlaster
         {
             string usename = localSettings.Values["username"].ToString();
 
-            ParseObject player = new ParseObject("Players");
-            player["name"] = usename;
-            player["score"] = totalstars.ToString();
-            player.SaveAsync();
-            Frame.Navigate(typeof(highScoresPage));
+            ParseObject playera = ParseObject.Create("Players");
+            playera["name"] = usename;
+            playera["score"] = totalstars.ToString();
+            playera.SaveAsync();
+            Frame.Navigate(typeof(HighScoresPage));
         }
 
 

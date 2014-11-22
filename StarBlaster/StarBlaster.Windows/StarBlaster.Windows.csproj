@@ -110,6 +110,9 @@
     <Compile Include="gamePage.xaml.cs">
       <DependentUpon>gamePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="highScoresPage.xaml.cs">
+      <DependentUpon>highScoresPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="gamePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="highScoresPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

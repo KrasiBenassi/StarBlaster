@@ -15,7 +15,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AppViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PlayersViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PlayerViewModel.cs" />
   </ItemGroup>
 </Project>
