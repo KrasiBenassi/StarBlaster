@@ -9,7 +9,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.Networking.Connectivity;
 using Windows.Storage;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -33,6 +35,7 @@ namespace StarBlaster
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
+        //ConnectionProfile internetConnection = NetworkInformation.GetInternetConnectionProfile();
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
         DispatcherTimer gameTimer = new DispatcherTimer();
 
@@ -45,7 +48,6 @@ namespace StarBlaster
         public GamePage()
         {
             this.InitializeComponent();
-
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
             dispatcherTimer.Tick += new EventHandler<object>(DispatcherTimer_Tick);
 
@@ -93,7 +95,7 @@ namespace StarBlaster
 
                 if (localSettings.Values["score"] == null)
                 {
-                    localSettings.Values["score"] = totalstars;     
+                    localSettings.Values["score"] = totalstars;
                 }
                 else
                 {
@@ -101,8 +103,8 @@ namespace StarBlaster
                     {
                         localSettings.Values["score"] = totalstars;
                     }
-                }  
-      
+                }
+
                 ShowResult();
             }
             else
@@ -163,17 +165,72 @@ namespace StarBlaster
             totalstars++;
 
             scoreTextBlock.Text = totalstars.ToString();
-            SpawnStar();
+            SpawnRandom();
+        }
+
+        private void SpawnMoon()
+        {
+            Image newMoon = new Image();
+            newMoon.Name = "moon" + totalstars.ToString();
+            BitmapImage img = new BitmapImage(new Uri("ms-appx:///Assets/moon.png", UriKind.Absolute));
+
+            newMoon.Source = img;
+            newMoon.Width = 50;
+            newMoon.Holding += NewMoon_Hold;
+
+            double caw = canvasArea.ActualWidth;
+            double cah = canvasArea.ActualHeight;
+
+            Random number = new Random();
+            int leftposition = number.Next(0, (int)caw - 60);
+            int topposition = number.Next(0, (int)cah - 60);
+
+            Canvas.SetLeft(newMoon, leftposition);
+            Canvas.SetTop(newMoon, topposition);
+            canvasArea.Children.Add(newMoon);
+        }
+
+        private void NewMoon_Hold(object sender, HoldingRoutedEventArgs e)
+        {
+            Image image = sender as Image;
+            canvasArea.Children.Remove(image);
+            totalstars += 2;
+
+            scoreTextBlock.Text = totalstars.ToString();
+            SpawnRandom();
+        }
+
+        private void SpawnRandom()
+        {
+            Random num = new Random();
+            int moonOrStar = num.Next(1, 5);
+            if (moonOrStar == 4)
+            {
+                SpawnMoon();
+            }
+            else
+            {
+                SpawnStar();
+            }
         }
 
         private void UploadButton_Click(object sender, RoutedEventArgs e)
         {
+            //if (internetConnection.WwanConnectionProfileDetails != null)
+            //{
+                
+            //}
+            //else
+            //{
+            //    new MessageDialog("Enter valid user name").ShowAsync();
+            //}
             string usename = localSettings.Values["username"].ToString();
 
-            ParseObject player = new ParseObject("Players");
-            player["name"] = usename;
-            player["score"] = totalstars.ToString();
-            player.SaveAsync();
+            ParseObject playera = ParseObject.Create("Players");
+            playera["name"] = usename;
+            playera["score"] = totalstars.ToString();
+            playera.SaveAsync();
+            new MessageDialog("You Score Is Uploaded").ShowAsync();
             Frame.Navigate(typeof(HighScoresPage));
         }
 
@@ -248,6 +305,11 @@ namespace StarBlaster
         }
 
         #endregion
+
+        private void SkipButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
 
 
     }

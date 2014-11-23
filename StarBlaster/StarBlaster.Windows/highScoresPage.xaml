@@ -5,12 +5,11 @@
     xmlns:local="using:StarBlaster"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
     <Page.Resources>
-        <Style x:Name="BigTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="36"/>
+        <Style x:Name="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="35" />
         </Style>
     </Page.Resources>
     <Grid>
@@ -22,22 +21,27 @@
                 FontSize="25"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
-                Command="{Binding Refresh}" Margin="93,575,95,1"/>
-        <ListView SelectionMode="None" ItemsSource="{Binding Players}" Margin="41,231,41,70" Background="#7F8A80CB">
+                Margin="345,712,345,1" Click="Button_Click"/>
+        <ListView SelectionMode="None" ItemsSource="{Binding Players}" Margin="385,233,365,70" Background="#7F8A80CB">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Name}"
-                                   Style="{StaticResource BigTextStyle}"/>
+                                   Style="{StaticResource TextBlockStyle}"
+                                   Foreground="LightSkyBlue"
+                                   MinWidth="250"
+                                   Margin="15, 0, 0, 0"/>
                         <TextBlock Text="{Binding Score}" 
-                                   Style="{StaticResource BigTextStyle}"
-                                   Margin="5 0 0 0"/>
+                                   Style="{StaticResource TextBlockStyle}"
+                                   Foreground="LemonChiffon"
+                                   TextAlignment="Center"
+                                   />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <TextBlock HorizontalAlignment="Left" FontSize="40" TextAlignment="Center" Margin="41,152,0,0" TextWrapping="Wrap" Text="Top Players" VerticalAlignment="Top" Height="47" Width="318"/>
-        <TextBlock HorizontalAlignment="Left" Margin="118,39,0,0" TextWrapping="Wrap" FontSize="30" TextAlignment="Center" Text="My Best" VerticalAlignment="Top" Height="35" Width="147"/>
-        <TextBlock x:Name="myBestScore" HorizontalAlignment="Left" Margin="146,79,0,0" TextWrapping="Wrap" Text="00" FontSize="50" TextAlignment="Center" VerticalAlignment="Top" Width="92" Height="48"/>
+        <TextBlock HorizontalAlignment="Left" FontSize="40" TextAlignment="Center" Margin="531,154,0,0" TextWrapping="Wrap" Text="Top Players" VerticalAlignment="Top" Height="47" Width="318"/>
+        <TextBlock HorizontalAlignment="Left" Margin="612,39,0,0" TextWrapping="Wrap" FontSize="30" TextAlignment="Center" Text="My Best" VerticalAlignment="Top" Height="35" Width="147" RenderTransformOrigin="0.497,0.543"/>
+        <TextBlock x:Name="myBestScore" HorizontalAlignment="Left" Margin="644,79,0,0" TextWrapping="Wrap" Text="00" FontSize="50" TextAlignment="Center" VerticalAlignment="Top" Width="92" Height="48"/>
     </Grid>
 </Page>

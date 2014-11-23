@@ -27,6 +27,8 @@ namespace StarBlaster
     {
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         private NavigationHelper navigationHelper;
+        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+
         public HighScoresPage()
         {
             this.InitializeComponent();
@@ -41,19 +43,19 @@ namespace StarBlaster
         /// <summary>
         /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
         /// </summary>
-        //public NavigationHelper NavigationHelper
-        //{
-        //    get { return this.navigationHelper; }
-        //}
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
 
         ///// <summary>
         ///// Gets the view model for this <see cref="Page"/>.
         ///// This can be changed to a strongly typed view model.
         ///// </summary>
-        //public ObservableDictionary DefaultViewModel
-        //{
-        //    get { return this.defaultViewModel; }
-        //}
+        public ObservableDictionary DefaultViewModel
+        {
+            get { return this.defaultViewModel; }
+        }
 
         /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
@@ -113,5 +115,10 @@ namespace StarBlaster
         }
 
         #endregion
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = new AppViewModel();
+        }
     }
 }
