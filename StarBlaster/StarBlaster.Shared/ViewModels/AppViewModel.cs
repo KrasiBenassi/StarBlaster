@@ -56,31 +56,27 @@ namespace StarBlaster.ViewModels
 
         private void PerformRefresh()
         {
+            this.players.Clear();
             this.LoadPlayers();
         }
 
         public AppViewModel()
         {
+            if (!(this.players == null))
+            {
+                this.players.Clear();
+            } 
             this.LoadPlayers();
         }
 
         public async Task LoadPlayers()
         {
-            //var phoneLinq = 
-            //    from phone in new ParseQuery<Phone>()
-            //    where phone.Model.StartsWith("L")
-            //    orderby phone.Model
-            //    select phone;
-
-            var players = await new ParseQuery<Player>()
+            
+            var players = await new ParseQuery<Player>().OrderByDescending("score")
                 .FindAsync(CancellationToken.None);
 
             this.Players = players.AsQueryable()
                 .Select(PlayerViewModel.FromModel);
-            //var phones = await ParseObject.GetQuery("Phones")
-            //        .FindAsync();
-            //this.Phones = phones.AsQueryable()
-            //    .Select(PhoneViewModel.FromParseObject);
         }
     }
 }
