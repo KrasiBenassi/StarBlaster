@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StarBlaster.ViewModels;
+using System;
 using System.Linq;
 using Windows.Storage;
 using Windows.UI.Popups;
@@ -16,8 +17,7 @@ namespace StarBlaster
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        //ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-
+        
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
         public MainPage()
@@ -55,7 +55,7 @@ namespace StarBlaster
             }
             else
             {
-                new MessageDialog("Enter valid user name").ShowAsync();
+                new MessageDialog("Enter valid user name between 3 and 8 characters").ShowAsync();
             }
         }
 
@@ -63,7 +63,7 @@ namespace StarBlaster
         {
             bool result = false;
             
-            if (userName.All(char.IsLetter))
+            if (userName.All(char.IsLetter) && userName != null && userName.Length > 2 && userName.Length < 9)
             {
                 result = true;
             }

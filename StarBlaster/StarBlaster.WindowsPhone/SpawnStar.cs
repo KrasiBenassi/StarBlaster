@@ -9,8 +9,9 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace StarBlaster
 {
-    public class SpawnStar 
+    public class SpawnStar
     {
-     
+        public int Source { get; set; }
+
     }
 }

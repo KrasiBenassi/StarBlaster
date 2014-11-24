@@ -41,7 +41,6 @@ namespace StarBlaster
             this.Suspending += this.OnSuspending;
 
             ParseObject.RegisterSubclass<Player>();
-
             ParseClient.Initialize("Ec6VT7l5FuLapnMpOSBX3r8gLl5bgKAF2bHbwgjh", "gksHP8xBpJlimSCAhFNPlOpH8c8gueWPZttKOS7N");
         }
 

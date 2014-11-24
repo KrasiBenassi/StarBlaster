@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Collections;
 
 namespace StarBlaster.ViewModels
 {
@@ -71,10 +72,8 @@ namespace StarBlaster.ViewModels
 
         public async Task LoadPlayers()
         {
-            
             var players = await new ParseQuery<Player>().OrderByDescending("score")
                 .FindAsync(CancellationToken.None);
-
             this.Players = players.AsQueryable()
                 .Select(PlayerViewModel.FromModel);
         }

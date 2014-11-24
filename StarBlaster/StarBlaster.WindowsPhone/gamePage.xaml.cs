@@ -38,11 +38,10 @@ namespace StarBlaster
         //ConnectionProfile internetConnection = NetworkInformation.GetInternetConnectionProfile();
         DispatcherTimer dispatcherTimer = new DispatcherTimer();
         DispatcherTimer gameTimer = new DispatcherTimer();
-
-        bool srarted = false;
-        string user = "";
+        Random randomNumber = new Random();
+        bool isSrarted = false;
         int countdown = 3;
-        int totalstars = 0;
+        int totalscores = 0;
         int gametime = 30;
 
         public GamePage()
@@ -50,7 +49,7 @@ namespace StarBlaster
             this.InitializeComponent();
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
             dispatcherTimer.Tick += new EventHandler<object>(DispatcherTimer_Tick);
-
+            
             gameTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
             gameTimer.Tick += new EventHandler<object>(GameTimer_Tick);
 
@@ -69,7 +68,7 @@ namespace StarBlaster
                     countdown--;
                     //spawn the firs star
                     timeTextBlock.Text = gametime.ToString();
-                    scoreTextBlock.Text = totalstars.ToString();
+                    scoreTextBlock.Text = totalscores.ToString();
                     gameTimer.Start();
                     SpawnStar();
                 }
@@ -95,13 +94,13 @@ namespace StarBlaster
 
                 if (localSettings.Values["score"] == null)
                 {
-                    localSettings.Values["score"] = totalstars;
+                    localSettings.Values["score"] = totalscores;
                 }
                 else
                 {
-                    if ((int)localSettings.Values["score"] < totalstars)
+                    if ((int)localSettings.Values["score"] < totalscores)
                     {
-                        localSettings.Values["score"] = totalstars;
+                        localSettings.Values["score"] = totalscores;
                     }
                 }
 
@@ -116,16 +115,16 @@ namespace StarBlaster
 
         private void ShowResult()
         {
-            resultsTitleText.Text = "Time Is Up";
-            resultsScoreTotalText.Text = totalstars.ToString();
+            resultsTitleText.Text = "Time Is Up" + localSettings.Values["username"];
+            resultsScoreTotalText.Text = totalscores.ToString();
             resultsGrid.Visibility = Visibility.Visible;
         }
 
         private void TapAreaButton_Click(object sender, RoutedEventArgs e)
         {
-            if (srarted == false)
+            if (isSrarted == false)
             {
-                srarted = true;
+                isSrarted = true;
                 tapAreaButton.Visibility = Visibility.Collapsed;
                 dispatcherTimer.Start();
 
@@ -139,19 +138,15 @@ namespace StarBlaster
         private void SpawnStar()
         {
             Image newStar = new Image();
-            newStar.Name = "star" + totalstars.ToString();
+            newStar.Name = "star" + totalscores.ToString();
             BitmapImage img = new BitmapImage(new Uri("ms-appx:///Assets/star.png", UriKind.Absolute));
 
             newStar.Source = img;
             newStar.Width = 50;
             newStar.Tapped += NewStar_Tapped;
 
-            double caw = canvasArea.ActualWidth;
-            double cah = canvasArea.ActualHeight;
-
-            Random number = new Random();
-            int leftposition = number.Next(0, (int)caw - 60);
-            int topposition = number.Next(0, (int)cah - 60);
+            int leftposition = randomNumber.Next(0, (int)canvasArea.ActualWidth - 60);
+            int topposition = randomNumber.Next(0, (int)canvasArea.ActualWidth - 60);
 
             Canvas.SetLeft(newStar, leftposition);
             Canvas.SetTop(newStar, topposition);
@@ -162,28 +157,23 @@ namespace StarBlaster
         {
             Image image = sender as Image;
             canvasArea.Children.Remove(image);
-            totalstars++;
-
-            scoreTextBlock.Text = totalstars.ToString();
+            totalscores++;
+            scoreTextBlock.Text = totalscores.ToString();
             SpawnRandom();
         }
 
         private void SpawnMoon()
         {
             Image newMoon = new Image();
-            newMoon.Name = "moon" + totalstars.ToString();
+            newMoon.Name = "moon" + totalscores.ToString();
             BitmapImage img = new BitmapImage(new Uri("ms-appx:///Assets/moon.png", UriKind.Absolute));
 
             newMoon.Source = img;
             newMoon.Width = 50;
             newMoon.Holding += NewMoon_Hold;
 
-            double caw = canvasArea.ActualWidth;
-            double cah = canvasArea.ActualHeight;
-
-            Random number = new Random();
-            int leftposition = number.Next(0, (int)caw - 60);
-            int topposition = number.Next(0, (int)cah - 60);
+            int leftposition = randomNumber.Next(0, (int)canvasArea.ActualWidth - 60);
+            int topposition = randomNumber.Next(0, (int)canvasArea.ActualWidth - 60);
 
             Canvas.SetLeft(newMoon, leftposition);
             Canvas.SetTop(newMoon, topposition);
@@ -194,19 +184,49 @@ namespace StarBlaster
         {
             Image image = sender as Image;
             canvasArea.Children.Remove(image);
-            totalstars += 2;
+            totalscores += 3;
+            scoreTextBlock.Text = totalscores.ToString();
+            SpawnRandom();
+        }
 
-            scoreTextBlock.Text = totalstars.ToString();
+        private void SpawnBlackHole()
+        {
+            Image newHole = new Image();
+            newHole.Name = "star" + totalscores.ToString();
+            BitmapImage img = new BitmapImage(new Uri("ms-appx:///Assets/blackhole.png", UriKind.Absolute));
+
+            newHole.Source = img;
+            newHole.Width = 50;
+            newHole.DoubleTapped += NewBlackhole_Tapped;
+
+            int leftposition = randomNumber.Next(0, (int)canvasArea.ActualWidth - 60);
+            int topposition = randomNumber.Next(0, (int)canvasArea.ActualWidth - 60);
+
+            Canvas.SetLeft(newHole, leftposition);
+            Canvas.SetTop(newHole, topposition);
+            canvasArea.Children.Add(newHole);
+        }
+
+        private void NewBlackhole_Tapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            Image image = sender as Image;
+            canvasArea.Children.Remove(image);
+            totalscores += 2;
+
+            scoreTextBlock.Text = totalscores.ToString();
             SpawnRandom();
         }
 
         private void SpawnRandom()
         {
-            Random num = new Random();
-            int moonOrStar = num.Next(1, 5);
+            int moonOrStar = randomNumber.Next(1, 8);
             if (moonOrStar == 4)
             {
                 SpawnMoon();
+            }
+            else if (moonOrStar == 6)
+            {
+                SpawnBlackHole();
             }
             else
             {
@@ -228,7 +248,7 @@ namespace StarBlaster
 
             ParseObject playera = ParseObject.Create("Players");
             playera["name"] = usename;
-            playera["score"] = totalstars.ToString();
+            playera["score"] = totalscores.ToString();
             playera.SaveAsync();
             new MessageDialog("You Score Is Uploaded").ShowAsync();
             Frame.Navigate(typeof(HighScoresPage));

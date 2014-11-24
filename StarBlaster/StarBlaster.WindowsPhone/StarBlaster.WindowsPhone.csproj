@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\background.png" />
+    <Content Include="Assets\blackhole.png" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\moon.png" />
